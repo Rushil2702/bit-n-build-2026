@@ -3,27 +3,47 @@ import Badge from '../ui/Badge';
 import { eventDetails } from '../../data/mockData';
 
 export default function EventContextBanner() {
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Good morning';
+    if (hour < 17) return 'Good afternoon';
+    return 'Good evening';
+  };
+
   return (
     <div
+      className="bg-halftone-pattern"
       style={{
         backgroundColor: 'var(--bg-card)',
         border: '1px solid var(--border-subtle)',
         borderRadius: '12px',
-        padding: '24px 28px',
+        padding: '26px 30px',
         marginBottom: '20px',
         position: 'relative',
         overflow: 'hidden',
+        boxShadow: 'var(--shadow-card)',
       }}
     >
-      {/* Background Subtle Accent Glow */}
+      {/* Spider-Verse Subtle Atmospheric Lights */}
       <div
         style={{
           position: 'absolute',
-          top: '-60px',
+          top: '-80px',
+          right: '20%',
+          width: '280px',
+          height: '200px',
+          background: 'radial-gradient(circle, rgba(225, 29, 72, 0.12) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '-60px',
           right: '-40px',
-          width: '240px',
+          width: '220px',
           height: '180px',
-          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, rgba(139, 92, 246, 0.04) 50%, transparent 80%)',
+          background: 'radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, transparent 70%)',
           pointerEvents: 'none',
         }}
       />
@@ -34,15 +54,26 @@ export default function EventContextBanner() {
           flexWrap: 'wrap',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '20px',
+          gap: '24px',
+          position: 'relative',
+          zIndex: 1,
         }}
       >
-        {/* Left: Event Details & Meta */}
-        <div style={{ flex: '1 1 500px' }}>
+        {/* Left: Greeting & Current Event Context */}
+        <div style={{ flex: '1 1 520px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-            <Badge variant="info" size="sm" dot>
-              {eventDetails.status}
-            </Badge>
+            <span
+              style={{
+                fontSize: '13px',
+                fontWeight: '600',
+                color: 'var(--color-primary)',
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase',
+              }}
+            >
+              {getGreeting()}, {eventDetails.leadOrganizer.name.split(' ')[0]}
+            </span>
+            <span style={{ color: 'var(--text-muted)' }}>•</span>
             <Badge variant="neutral" size="sm">
               {eventDetails.currentSprint}
             </Badge>
@@ -51,11 +82,12 @@ export default function EventContextBanner() {
           <h2
             style={{
               fontFamily: 'var(--font-brand)',
-              fontSize: '22px',
-              fontWeight: '700',
+              fontSize: '24px',
+              fontWeight: '800',
               color: 'var(--text-heading)',
-              letterSpacing: '-0.02em',
-              marginBottom: '10px',
+              letterSpacing: '-0.025em',
+              marginBottom: '12px',
+              lineHeight: '1.2',
             }}
           >
             {eventDetails.fullTitle}
@@ -76,64 +108,85 @@ export default function EventContextBanner() {
               <span>{eventDetails.dates}</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <MapPin size={14} color="var(--color-primary)" />
+              <MapPin size={14} color="var(--color-secondary)" />
               <span>{eventDetails.location}</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Flag size={14} color="var(--color-primary)" />
+              <Flag size={14} color="var(--text-muted)" />
               <span>{eventDetails.chapter}</span>
             </div>
           </div>
         </div>
 
-        {/* Right: Operations Health & Quick Stats Box */}
+        {/* Right: Days to Launch & Readiness Meter */}
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '24px',
-            padding: '14px 20px',
+            gap: '20px',
+            padding: '16px 24px',
             backgroundColor: 'var(--bg-canvas)',
             border: '1px solid var(--border-subtle)',
             borderRadius: '10px',
+            boxShadow: 'var(--shadow-sm)',
           }}
         >
-          {/* Days Left Widget */}
+          {/* Days Left Countdown */}
           <div style={{ textAlign: 'center', paddingRight: '20px', borderRight: '1px solid var(--border-subtle)' }}>
             <div
               style={{
-                fontSize: '26px',
-                fontWeight: '800',
+                fontSize: '32px',
+                fontWeight: '900',
                 color: 'var(--color-primary)',
                 fontFamily: 'var(--font-brand)',
                 lineHeight: '1',
+                letterSpacing: '-0.03em',
               }}
             >
-              {eventDetails.daysRemaining}
+              T-{eventDetails.daysRemaining}
             </div>
-            <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            <div
+              style={{
+                fontSize: '11px',
+                color: 'var(--text-muted)',
+                marginTop: '4px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+                fontWeight: '600',
+              }}
+            >
               Days to Launch
             </div>
           </div>
 
-          {/* Readiness Score Widget */}
+          {/* Readiness Score */}
           <div style={{ textAlign: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
               <span
                 style={{
-                  fontSize: '26px',
-                  fontWeight: '800',
+                  fontSize: '32px',
+                  fontWeight: '900',
                   color: 'var(--color-success)',
                   fontFamily: 'var(--font-brand)',
                   lineHeight: '1',
+                  letterSpacing: '-0.03em',
                 }}
               >
                 {eventDetails.readinessScore}%
               </span>
-              <CheckCircle2 size={18} color="var(--color-success)" />
+              <CheckCircle2 size={20} color="var(--color-success)" />
             </div>
-            <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-              Overall Readiness
+            <div
+              style={{
+                fontSize: '11px',
+                color: 'var(--text-muted)',
+                marginTop: '4px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+                fontWeight: '600',
+              }}
+            >
+              Readiness Score
             </div>
           </div>
         </div>

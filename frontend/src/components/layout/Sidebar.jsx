@@ -1,8 +1,13 @@
-import { Zap, Layers } from 'lucide-react';
+import { useState } from 'react';
+import { Zap, Layers, Sun, Moon, Monitor } from 'lucide-react';
 import { eventDetails } from '../../data/mockData';
 import { NAV_ITEMS } from '../../data/navigation';
+import { useTheme } from '../../context/useTheme';
+import ThemeSelectorPopover from './ThemeSelectorPopover';
 
 export default function Sidebar({ currentRoute = 'overview', onNavigate }) {
+  const [isThemePopoverOpen, setIsThemePopoverOpen] = useState(false);
+  const { theme } = useTheme();
   return (
     <aside
       className="clubops-sidebar"
@@ -140,7 +145,7 @@ export default function Sidebar({ currentRoute = 'overview', onNavigate }) {
               width: '24px',
               height: '24px',
               borderRadius: '6px',
-              backgroundColor: 'rgba(255, 255, 255, 0.04)',
+              backgroundColor: 'var(--bg-muted-alpha)',
               color: 'var(--text-muted)',
             }}
           >
@@ -241,19 +246,19 @@ export default function Sidebar({ currentRoute = 'overview', onNavigate }) {
                         ? 'var(--color-ai-light)'
                         : item.badgeVariant === 'warning'
                         ? 'var(--color-warning-bg)'
-                        : 'rgba(255, 255, 255, 0.07)',
+                        : 'var(--bg-badge-neutral)',
                     color:
                       item.badgeVariant === 'ai'
                         ? 'var(--color-ai)'
                         : item.badgeVariant === 'warning'
                         ? 'var(--color-warning)'
-                        : 'var(--text-muted)',
+                        : 'var(--text-badge-neutral)',
                     border:
                       item.badgeVariant === 'ai'
                         ? '1px solid var(--color-ai-border)'
                         : item.badgeVariant === 'warning'
                         ? '1px solid var(--color-warning-border)'
-                        : '1px solid var(--border-subtle)',
+                        : '1px solid var(--border-badge-neutral)',
                   }}
                 >
                   {item.badge}
@@ -264,18 +269,19 @@ export default function Sidebar({ currentRoute = 'overview', onNavigate }) {
         })}
       </nav>
 
-      {/* Footer / User Profile */}
+      {/* Footer / User Profile & Appearance Switcher */}
       <div
         style={{
-          padding: '14px 16px',
+          padding: '12px 14px',
           borderTop: '1px solid var(--border-subtle)',
           backgroundColor: 'var(--bg-sidebar)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
+          position: 'relative',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0, flex: 1 }}>
           <div
             style={{
               width: '32px',
@@ -294,7 +300,7 @@ export default function Sidebar({ currentRoute = 'overview', onNavigate }) {
           >
             {eventDetails.leadOrganizer.avatar}
           </div>
-          <div style={{ minWidth: 0 }}>
+          <div style={{ minWidth: 0, flex: 1 }}>
             <div
               style={{
                 fontSize: '12px',
@@ -321,15 +327,53 @@ export default function Sidebar({ currentRoute = 'overview', onNavigate }) {
           </div>
         </div>
 
-        <div
-          title="System Operational"
-          style={{
-            width: '8px',
-            height: '8px',
-            borderRadius: '50%',
-            backgroundColor: 'var(--color-success)',
-            boxShadow: '0 0 6px var(--color-success)',
-          }}
+        {/* Appearance / Theme Selector Toggle Button */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+          <button
+            type="button"
+            onClick={() => setIsThemePopoverOpen(!isThemePopoverOpen)}
+            title={`Appearance: ${theme.charAt(0).toUpperCase() + theme.slice(1)} mode (Click to change)`}
+            aria-label="Toggle appearance theme menu"
+            style={{
+              width: '28px',
+              height: '28px',
+              borderRadius: 'var(--radius-sm, 6px)',
+              backgroundColor: isThemePopoverOpen ? 'var(--bg-sidebar-active)' : 'var(--bg-card)',
+              border: isThemePopoverOpen ? '1px solid var(--border-focus)' : '1px solid var(--border-subtle)',
+              color: isThemePopoverOpen ? 'var(--color-primary)' : 'var(--text-secondary)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'all var(--transition-fast)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = 'var(--border-hover)';
+              e.currentTarget.style.color = 'var(--text-primary)';
+            }}
+            onMouseLeave={(e) => {
+              if (!isThemePopoverOpen) {
+                e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                e.currentTarget.style.color = 'var(--text-secondary)';
+              }
+            }}
+          >
+            {theme === 'spider-verse' ? (
+              <Zap size={14} color="var(--color-primary)" />
+            ) : theme === 'light' ? (
+              <Sun size={14} />
+            ) : theme === 'system' ? (
+              <Monitor size={14} />
+            ) : (
+              <Moon size={14} />
+            )}
+          </button>
+        </div>
+
+        {/* Theme Selector Popover */}
+        <ThemeSelectorPopover
+          isOpen={isThemePopoverOpen}
+          onClose={() => setIsThemePopoverOpen(false)}
         />
       </div>
     </aside>

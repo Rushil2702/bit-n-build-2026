@@ -86,7 +86,7 @@ export default function OperationalShortcuts() {
                     width: '32px',
                     height: '32px',
                     borderRadius: '6px',
-                    backgroundColor: isTriggered ? 'var(--color-primary)' : 'rgba(255, 255, 255, 0.04)',
+                    backgroundColor: isTriggered ? 'var(--color-primary)' : 'var(--bg-muted-alpha)',
                     color: isTriggered ? '#ffffff' : 'var(--color-primary)',
                     display: 'flex',
                     alignItems: 'center',

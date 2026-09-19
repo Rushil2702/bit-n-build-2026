@@ -15,12 +15,12 @@ export default function Card({
     <div
       className={`clubops-card ${aiGlow ? 'clubops-card-ai' : ''} ${className}`}
       style={{
-        background: aiGlow ? 'linear-gradient(180deg, #161a2e 0%, #111827 100%)' : 'var(--bg-card)',
+        background: aiGlow ? 'var(--bg-card-ai)' : 'var(--bg-card)',
         border: aiGlow ? '1px solid var(--color-ai-border)' : '1px solid var(--border-subtle)',
-        borderRadius: '10px',
+        borderRadius: 'var(--radius-lg, 10px)',
         boxShadow: aiGlow ? 'var(--shadow-ai-glow)' : 'var(--shadow-card)',
         overflow: 'hidden',
-        transition: 'border-color var(--transition-fast), box-shadow var(--transition-fast)',
+        transition: 'border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast)',
         ...style,
       }}
     >

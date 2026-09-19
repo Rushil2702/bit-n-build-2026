@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { ThemeProvider } from './context/ThemeContext';
 import Shell from './components/layout/Shell';
 import OverviewPage from './pages/OverviewPage';
 import MyTasksPage from './pages/MyTasksPage';
+import EventsPage from './pages/EventsPage';
 import PlaceholderPage from './pages/PlaceholderPage';
 
 export default function App() {
@@ -31,14 +33,18 @@ export default function App() {
   };
 
   return (
-    <Shell currentRoute={currentRoute} onNavigate={handleNavigate}>
-      {currentRoute === 'overview' ? (
-        <OverviewPage />
-      ) : currentRoute === 'tasks' ? (
-        <MyTasksPage />
-      ) : (
-        <PlaceholderPage routeId={currentRoute} onNavigate={handleNavigate} />
-      )}
-    </Shell>
+    <ThemeProvider>
+      <Shell currentRoute={currentRoute} onNavigate={handleNavigate}>
+        {currentRoute === 'overview' ? (
+          <OverviewPage onNavigate={handleNavigate} />
+        ) : currentRoute === 'tasks' ? (
+          <MyTasksPage />
+        ) : currentRoute === 'events' ? (
+          <EventsPage onNavigate={handleNavigate} />
+        ) : (
+          <PlaceholderPage routeId={currentRoute} onNavigate={handleNavigate} />
+        )}
+      </Shell>
+    </ThemeProvider>
   );
 }

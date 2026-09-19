@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Sparkles, Send, Copy, Check, Terminal } from 'lucide-react';
+import { MessageSquare, Send, Copy, Check, Terminal } from 'lucide-react';
 import Card from '../ui/Card';
 import Badge from '../ui/Badge';
 import Button from '../ui/Button';
@@ -26,48 +26,48 @@ export default function AiCopilotWidget() {
     setIsThinking(true);
     setTimeout(() => {
       setCustomResponse(
-        `ClubOps AI Synthesis for "${customInput}":\n• Cross-referenced TechFest 2026 registry with 842 hackers and 42 active volunteers.\n• Recommendation: Coordinate with committee leads in #tech-infra and dispatch verified action items to Sprint 3 queue.`
+        `Operations Summary for "${customInput}":\n• Cross-referenced TechFest 2026 registry (842 hackers, 42 volunteers on-duty).\n• Relevant Lead: Tech & Infra Committee. Recommended action: Verify status in Command Center or dispatch task to Sprint 3 queue.`
       );
       setIsThinking(false);
       setCustomInput('');
-    }, 600);
+    }, 500);
   };
 
   const activeContent = customResponse || selectedPrompt.response;
 
   return (
     <Card
-      title="ClubOps AI Copilot"
-      subtitle="Autonomous event synthesis, workload calculation & email drafts"
-      icon={Sparkles}
-      aiGlow
+      title="Operations Assistant"
+      subtitle="Contextual intelligence & operational query helper"
+      icon={MessageSquare}
       action={
-        <Badge variant="ai" size="sm" dot>
-          Active Model: Ops-4o
+        <Badge variant="neutral" size="sm">
+          Online
         </Badge>
       }
     >
-      {/* Quick Prompt Chips */}
-      <div style={{ marginBottom: '14px' }}>
+      {/* Quick Query Chips */}
+      <div style={{ marginBottom: '12px' }}>
         <div
           style={{
             fontSize: '11px',
             fontWeight: '600',
             textTransform: 'uppercase',
-            letterSpacing: '0.05em',
+            letterSpacing: '0.04em',
             color: 'var(--text-muted)',
-            marginBottom: '8px',
+            marginBottom: '6px',
           }}
         >
-          Suggested Quick Prompts:
+          Common Operational Queries:
         </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
           {aiCopilotPrompts.map((p) => {
             const isSelected = selectedPrompt.id === p.id && !customResponse;
 
             return (
               <button
                 key={p.id}
+                type="button"
                 onClick={() => {
                   setSelectedPrompt(p);
                   setCustomResponse(null);
@@ -75,13 +75,13 @@ export default function AiCopilotWidget() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '6px',
-                  padding: '6px 11px',
+                  gap: '5px',
+                  padding: '5px 10px',
                   borderRadius: '6px',
-                  fontSize: '12px',
-                  backgroundColor: isSelected ? 'var(--color-ai-light)' : 'var(--bg-canvas)',
-                  border: isSelected ? '1px solid var(--color-ai-border)' : '1px solid var(--border-subtle)',
-                  color: isSelected ? 'var(--color-ai)' : 'var(--text-secondary)',
+                  fontSize: '11px',
+                  backgroundColor: isSelected ? 'var(--color-primary-light)' : 'var(--bg-canvas)',
+                  border: isSelected ? '1px solid var(--color-primary-border)' : '1px solid var(--border-subtle)',
+                  color: isSelected ? 'var(--color-primary)' : 'var(--text-secondary)',
                   cursor: 'pointer',
                   transition: 'all var(--transition-fast)',
                 }}
@@ -98,7 +98,6 @@ export default function AiCopilotWidget() {
                   }
                 }}
               >
-                <Sparkles size={12} />
                 <span>{p.title}</span>
               </button>
             );
@@ -106,14 +105,14 @@ export default function AiCopilotWidget() {
         </div>
       </div>
 
-      {/* AI Output Terminal Box */}
+      {/* Response Box */}
       <div
         style={{
           backgroundColor: 'var(--bg-canvas)',
           border: '1px solid var(--border-subtle)',
           borderRadius: '8px',
-          padding: '14px 16px',
-          marginBottom: '14px',
+          padding: '12px 14px',
+          marginBottom: '12px',
           position: 'relative',
         }}
       >
@@ -122,15 +121,15 @@ export default function AiCopilotWidget() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            marginBottom: '8px',
-            paddingBottom: '8px',
+            marginBottom: '6px',
+            paddingBottom: '6px',
             borderBottom: '1px solid var(--border-subtle)',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: 'var(--color-ai)' }}>
-            <Terminal size={13} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: 'var(--text-muted)' }}>
+            <Terminal size={12} />
             <span style={{ fontWeight: '600' }}>
-              {customResponse ? 'Autonomous Output' : selectedPrompt.title}
+              {customResponse ? 'Response' : selectedPrompt.title}
             </span>
           </div>
 
@@ -139,7 +138,7 @@ export default function AiCopilotWidget() {
             size="sm"
             icon={copied ? Check : Copy}
             onClick={handleCopy}
-            style={{ fontSize: '11px', padding: '2px 8px' }}
+            style={{ fontSize: '11px', padding: '2px 6px', height: '24px' }}
           >
             {copied ? 'Copied' : 'Copy'}
           </Button>
@@ -148,18 +147,13 @@ export default function AiCopilotWidget() {
         {isThinking ? (
           <div
             style={{
-              padding: '20px',
+              padding: '16px',
               textAlign: 'center',
-              color: 'var(--color-ai)',
-              fontSize: '13px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px',
+              color: 'var(--text-muted)',
+              fontSize: '12px',
             }}
           >
-            <Sparkles size={16} />
-            <span>Analyzing campus operational telemetry...</span>
+            Retrieving operational data...
           </div>
         ) : (
           <pre
@@ -167,7 +161,7 @@ export default function AiCopilotWidget() {
               fontFamily: 'inherit',
               fontSize: '12px',
               color: 'var(--text-secondary)',
-              lineHeight: '1.6',
+              lineHeight: '1.5',
               whiteSpace: 'pre-wrap',
               margin: 0,
             }}
@@ -177,7 +171,7 @@ export default function AiCopilotWidget() {
         )}
       </div>
 
-      {/* Input Prompt Bar */}
+      {/* Input Field */}
       <form
         onSubmit={handleCustomSubmit}
         style={{
@@ -186,31 +180,29 @@ export default function AiCopilotWidget() {
           gap: '8px',
         }}
       >
-        <div style={{ position: 'relative', flex: 1 }}>
-          <input
-            type="text"
-            value={customInput}
-            onChange={(e) => setCustomInput(e.target.value)}
-            placeholder="Ask AI Copilot (e.g. 'Draft reminder for catering team' or 'Check wifi bandwidth')..."
-            style={{
-              width: '100%',
-              backgroundColor: 'var(--bg-canvas)',
-              border: '1px solid var(--border-subtle)',
-              borderRadius: '7px',
-              padding: '8px 12px',
-              fontSize: '12px',
-              color: 'var(--text-primary)',
-            }}
-          />
-        </div>
+        <input
+          type="text"
+          value={customInput}
+          onChange={(e) => setCustomInput(e.target.value)}
+          placeholder="Ask Operations Assistant..."
+          style={{
+            flex: 1,
+            backgroundColor: 'var(--bg-canvas)',
+            border: '1px solid var(--border-subtle)',
+            borderRadius: '6px',
+            padding: '7px 11px',
+            fontSize: '12px',
+            color: 'var(--text-primary)',
+          }}
+        />
         <Button
-          variant="ai"
+          variant="primary"
           size="sm"
           type="submit"
           icon={Send}
           disabled={!customInput.trim() || isThinking}
         >
-          Synthesize
+          Ask
         </Button>
       </form>
     </Card>

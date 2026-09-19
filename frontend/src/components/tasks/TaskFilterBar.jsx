@@ -146,7 +146,7 @@ export default function TaskFilterBar({
           justifyContent: 'space-between',
           gap: '12px',
           paddingTop: '8px',
-          borderTop: '1px solid rgba(255, 255, 255, 0.04)',
+          borderTop: '1px solid var(--border-subtle)',
         }}
       >
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '10px' }}>
