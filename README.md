@@ -1,8 +1,38 @@
-# React + Vite
+# 🚀 ClubOps AI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> AI-powered Event Operations Platform for College Clubs
 
-Currently, two official plugins are available:
+## 📌 About
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+ClubOps AI is a centralized platform that helps college clubs manage events, tasks, volunteers, deadlines, risks and announcements from one dashboard.
+
+It reduces the dependency on scattered WhatsApp groups, spreadsheets and documents.
+
+## ✨ Features
+
+- 📊 Event Operations Dashboard
+- 📅 Event Management
+- ✅ Task Management
+- 👥 Volunteer Management
+- 🤖 AI-assisted Meeting Analysis
+- ⚠️ Risk Detection
+- 📢 AI-assisted Announcements
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React.js, Vite, JavaScript, CSS
+- **Backend:** Python, Flask, Flask-CORS
+- **Database:** PostgreSQL, psycopg2
+- **AI:** Google Gemini API
+- **Version Control:** Git & GitHub
+
+## 🏗️ Architecture
+
+```text
+React + Vite
+     ↓
+Flask REST API
+     ↓
+PostgreSQL
+     ↕
+Gemini AI
