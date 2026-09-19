@@ -89,7 +89,7 @@ export default function AiTaskIntelligence({ onApplySequence }) {
                     fontSize: '11px',
                     padding: '4px 6px',
                     borderRadius: '4px',
-                    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                    backgroundColor: 'var(--bg-muted-alpha)',
                   }}
                 >
                   <span

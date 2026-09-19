@@ -27,9 +27,9 @@ const variantStyles = {
     border: 'var(--color-ai-border)',
   },
   neutral: {
-    bg: 'rgba(255, 255, 255, 0.05)',
-    color: 'var(--text-secondary)',
-    border: 'var(--border-subtle)',
+    bg: 'var(--bg-badge-neutral)',
+    color: 'var(--text-badge-neutral)',
+    border: 'var(--border-badge-neutral)',
   },
 };
 

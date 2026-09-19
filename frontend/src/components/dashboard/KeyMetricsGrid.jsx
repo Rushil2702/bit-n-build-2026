@@ -60,7 +60,7 @@ export default function KeyMetricsGrid() {
                     width: '30px',
                     height: '30px',
                     borderRadius: '6px',
-                    backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                    backgroundColor: 'var(--bg-muted-alpha)',
                     border: '1px solid var(--border-subtle)',
                     display: 'flex',
                     alignItems: 'center',

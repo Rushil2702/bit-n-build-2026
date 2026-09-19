@@ -1,58 +1,45 @@
-import React from 'react';
 import EventContextBanner from '../components/dashboard/EventContextBanner';
-import AiOperationalAlert from '../components/dashboard/AiOperationalAlert';
-import KeyMetricsGrid from '../components/dashboard/KeyMetricsGrid';
-import ReadinessProgression from '../components/dashboard/ReadinessProgression';
+import SpiderSenseAlert from '../components/dashboard/SpiderSenseAlert';
+import PersonalWorkspace from '../components/dashboard/PersonalWorkspace';
+import EventPulse from '../components/dashboard/EventPulse';
+import CommandCenter from '../components/dashboard/CommandCenter';
 import TodayPriorities from '../components/dashboard/TodayPriorities';
-import VolunteerRoster from '../components/dashboard/VolunteerRoster';
-import UpcomingDeadlines from '../components/dashboard/UpcomingDeadlines';
-import LiveActivityStream from '../components/dashboard/LiveActivityStream';
-import ProactiveRiskRadar from '../components/dashboard/ProactiveRiskRadar';
-import OperationalShortcuts from '../components/dashboard/OperationalShortcuts';
 import AiCopilotWidget from '../components/dashboard/AiCopilotWidget';
+import OperationsDetailsPanel from '../components/dashboard/OperationsDetailsPanel';
 
-export default function OverviewPage() {
+export default function OverviewPage({ onNavigate }) {
   return (
-    <div className="overview-page" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      {/* 1. Event Context / Header */}
+    <div className="overview-page" style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+      {/* 1. Hero / Event Context */}
       <EventContextBanner />
 
-      {/* 2. AI Operational Alert */}
-      <AiOperationalAlert />
+      {/* 2. Spider-Sense Signature Anomaly Alert */}
+      <SpiderSenseAlert />
 
-      {/* 3. Key Metrics (4 KPI Cards) */}
-      <KeyMetricsGrid />
+      {/* 3. Personal Workspace (My Tasks, Meetings, Volunteers, Active Events) */}
+      <PersonalWorkspace onNavigate={onNavigate} />
 
-      {/* 4. Main 2-Column Desktop Grid for 1440px+ */}
+      {/* 4. Core Operations 2-Column Split (8fr / 4fr) */}
       <div className="grid-2col-main-side">
-        {/* Left / Major Operational Workstream Column */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          {/* Hackathon Readiness Progression */}
-          <ReadinessProgression />
+        {/* Left Column: Event Lifecycle, Command Center, Priorities */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+          {/* 4. Event Pulse: Planning → Setup → Live → Wrap-up */}
+          <EventPulse />
 
-          {/* Today's Priorities */}
+          {/* 5. Command Center (Top 3 items requiring immediate attention) */}
+          <CommandCenter />
+
+          {/* 6. Today's Priorities (Clean task list, minimal AI noise) */}
           <TodayPriorities />
-
-          {/* Proactive Risk Radar */}
-          <ProactiveRiskRadar />
-
-          {/* Operational Shortcuts */}
-          <OperationalShortcuts />
         </div>
 
-        {/* Right / AI Intelligence & People Ops Column */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          {/* AI Copilot Panel */}
+        {/* Right Column: Quiet AI Assistant & Secondary Operations Panel */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+          {/* 7. AI Operations Assistant (Visually secondary helper) */}
           <AiCopilotWidget />
 
-          {/* Upcoming Deadlines */}
-          <UpcomingDeadlines />
-
-          {/* Volunteer Roster */}
-          <VolunteerRoster />
-
-          {/* Live Activity Stream */}
-          <LiveActivityStream />
+          {/* Progressive Disclosure Panel: Deadlines, Volunteer Squads & Live Stream */}
+          <OperationsDetailsPanel />
         </div>
       </div>
     </div>

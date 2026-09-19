@@ -23,10 +23,10 @@ export default function Button({
         };
       case 'ai':
         return {
-          background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)',
+          background: 'linear-gradient(135deg, var(--color-primary) 0%, #991b1b 100%)',
           color: '#ffffff',
-          border: '1px solid rgba(167, 139, 250, 0.4)',
-          hoverBg: '#6d28d9',
+          border: '1px solid var(--color-primary-border)',
+          hoverBg: 'var(--color-primary-hover)',
         };
       case 'outline':
         return {
@@ -40,14 +40,14 @@ export default function Button({
           background: 'transparent',
           color: 'var(--text-secondary)',
           border: '1px solid transparent',
-          hoverBg: 'rgba(255, 255, 255, 0.05)',
+          hoverBg: 'var(--bg-hover-subtle)',
         };
       case 'danger':
         return {
           background: 'var(--color-danger)',
           color: '#ffffff',
           border: '1px solid var(--color-danger)',
-          hoverBg: '#dc2626',
+          hoverBg: 'var(--color-danger-hover)',
         };
       case 'secondary':
       default:
@@ -66,10 +66,11 @@ export default function Button({
     switch (size) {
       case 'sm':
         return {
-          padding: '5px 10px',
+          padding: '4px 10px',
           fontSize: '12px',
           iconSize: 14,
           gap: '6px',
+          height: '30px',
         };
       case 'lg':
         return {
@@ -77,14 +78,16 @@ export default function Button({
           fontSize: '14px',
           iconSize: 18,
           gap: '8px',
+          height: '42px',
         };
       case 'md':
       default:
         return {
-          padding: '7px 14px',
+          padding: '6px 14px',
           fontSize: '13px',
           iconSize: 16,
           gap: '8px',
+          height: '36px',
         };
     }
   };
@@ -103,9 +106,10 @@ export default function Button({
         justifyContent: 'center',
         gap: currentSize.gap,
         padding: currentSize.padding,
+        minHeight: currentSize.height,
         fontSize: currentSize.fontSize,
         fontWeight: '500',
-        borderRadius: '7px',
+        borderRadius: 'var(--radius-sm, 6px)',
         cursor: disabled ? 'not-allowed' : 'pointer',
         opacity: disabled ? 0.5 : 1,
         transition: 'all var(--transition-fast)',

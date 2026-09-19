@@ -34,16 +34,16 @@ export default function TaskItem({
     <div
       style={{
         backgroundColor: isCompleted
-          ? 'rgba(255, 255, 255, 0.015)'
+          ? 'var(--bg-muted-alpha)'
           : isBlocked
-          ? 'rgba(239, 68, 68, 0.04)'
+          ? 'var(--color-danger-bg)'
           : 'var(--bg-card)',
         border: isBlocked
-          ? '1px solid rgba(239, 68, 68, 0.25)'
+          ? '1px solid var(--color-danger-border)'
           : isCompleted
-          ? '1px solid rgba(255, 255, 255, 0.05)'
+          ? '1px solid var(--border-subtle)'
           : '1px solid var(--border-subtle)',
-        borderRadius: '9px',
+        borderRadius: 'var(--radius-md, 8px)',
         padding: '16px 18px',
         marginBottom: '10px',
         boxShadow: 'var(--shadow-card)',
