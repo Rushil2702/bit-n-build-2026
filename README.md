@@ -30,8 +30,11 @@ ClubOps AI helps clubs manage events, tasks, volunteers, meetings, deadlines, ri
 cd frontend
 npm install
 npm run dev
+```
+
 ### Backend
 ```bash
 cd backend
 pip install -r requirements.txt
 python app.py
+```
